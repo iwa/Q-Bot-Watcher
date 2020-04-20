@@ -1,6 +1,14 @@
 import rumps
 import requests
 import os
+import urllib.request
+
+def connect(host='http://google.com'):
+    try:
+        urllib.request.urlopen(host)
+        return True
+    except:
+        return False
 
 class QBotCheckerApp(object):
     def __init__(self):
@@ -14,23 +22,27 @@ class QBotCheckerApp(object):
         self.refresh_loop.start()
 
     def refresh_status(self, sender):
-        r = requests.get('https://iwa.sh/qbot')
-        if r.status_code == 200:
-            self.status.title = "online"
-            self.app.title = "🔷"
-            if(self.isCrashed == 1):
-                self.isCrashed = 0
-                #os.system('pm2 del qbot-fallback')
-        elif r.status_code == 404:
-            self.status.title = "crashed"
-            self.app.title = "🔶"
-            if(self.isCrashed == 0):
-                self.isCrashed = 1
-                rumps.notification(title="Q-Bot Crashed!", subtitle="Fallback version launched", message='')
-                #os.system('cd /Users/iwa/dev/node/Q-Bot-fallback && pm2 start . -n qbot-fallback')
+        if connect():
+            r = requests.get('https://iwa.sh/qbot')
+            if r.status_code == 200:
+                self.status.title = "online"
+                self.app.title = "🔷"
+                if(self.isCrashed == 1):
+                    self.isCrashed = 0
+                    #os.system('pm2 del qbot-fallback')
+            elif r.status_code == 404:
+                self.status.title = "crashed"
+                self.app.title = "🔶"
+                if(self.isCrashed == 0):
+                    self.isCrashed = 1
+                    rumps.notification(title="Q-Bot Crashed!", subtitle="Fallback version launched", message='')
+                    #os.system('cd /Users/iwa/dev/node/Q-Bot-fallback && pm2 start . -n qbot-fallback')
+            else:
+                self.status.title = "there's a problem"
+                self.app.title = "🛑"
         else:
-            self.status.title = "there's a problem"
-            self.app.title = "🛑"
+            self.status.title = "no connection"
+            self.app.title = "◽️"
 
     def run(self):
         self.app.run()
