@@ -18,7 +18,7 @@ class QBotCheckerApp(object):
         self.status = rumps.MenuItem(title="---", callback=None)
         self.app.menu = [self.status_title, self.status]
         self.refresh_status
-        self.refresh_loop = rumps.Timer(self.refresh_status, 30)
+        self.refresh_loop = rumps.Timer(self.refresh_status, 60)
         self.refresh_loop.start()
 
     def refresh_status(self, sender):
