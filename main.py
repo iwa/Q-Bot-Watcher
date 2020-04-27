@@ -35,7 +35,7 @@ class QBotCheckerApp(object):
                 self.app.title = "🔶"
                 if(self.isCrashed == 0):
                     self.isCrashed = 1
-                    rumps.notification(title="Q-Bot Crashed!", subtitle="Fallback version launched", message='')
+                    rumps.notification(title="Q-Bot Crashed!", subtitle="", message='')
                     #os.system('cd /Users/iwa/dev/node/Q-Bot-fallback && pm2 start . -n qbot-fallback')
             else:
                 self.status.title = "there's a problem"
