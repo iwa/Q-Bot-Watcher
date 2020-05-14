@@ -3,7 +3,7 @@ import requests
 import os
 import urllib.request
 
-def connect(host='http://google.com'):
+def connect(host='https://google.com'):
     try:
         urllib.request.urlopen(host)
         return True
