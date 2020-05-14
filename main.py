@@ -23,7 +23,7 @@ class QBotCheckerApp(object):
 
     def refresh_status(self, sender):
         if connect():
-            r = requests.get('https://iwa.sh/qbot')
+            r = requests.get('https://api.iwa.sh/app/qbot')
             if r.status_code == 200:
                 self.status.title = "online"
                 self.app.title = "🔷"
