@@ -10,7 +10,7 @@ def connect(host='https://google.com'):
     except:
         return False
 
-class QBotCheckerApp(object):
+class QBotWatcherApp(object):
     def __init__(self):
         self.isCrashed = 0
         self.app = rumps.App("Q-Bot Watcher", "◽️")
@@ -48,4 +48,4 @@ class QBotCheckerApp(object):
         self.app.run()
 
 if __name__ == '__main__':
-    QBotCheckerApp().run()
+    QBotWatcherApp().run()
